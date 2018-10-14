@@ -4,17 +4,14 @@
 #
 Name     : perl-Math-Base36
 Version  : 0.14
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/B/BR/BRICAS/Math-Base36-0.14.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BR/BRICAS/Math-Base36-0.14.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libm/libmath-base36-perl/libmath-base36-perl_0.14-1.debian.tar.xz
 Summary  : 'Encoding and decoding of base36 strings'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Math-Base36-man
-Requires: perl(Module::Install)
-Requires: perl(Sub::Uplevel)
-Requires: perl(Test::Exception)
+BuildRequires : buildreq-cpan
 BuildRequires : perl(Module::Install)
 BuildRequires : perl(Sub::Uplevel)
 BuildRequires : perl(Test::Exception)
@@ -25,19 +22,20 @@ Math::Base36 - Encoding and decoding of base36 strings
 SYNOPSIS
 use Math::Base36 ':all';
 
-%package man
-Summary: man components for the perl-Math-Base36 package.
-Group: Default
+%package dev
+Summary: dev components for the perl-Math-Base36 package.
+Group: Development
+Provides: perl-Math-Base36-devel = %{version}-%{release}
 
-%description man
-man components for the perl-Math-Base36 package.
+%description dev
+dev components for the perl-Math-Base36 package.
 
 
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Math-Base36-0.14
-mkdir -p %{_topdir}/BUILD/Math-Base36-0.14/deblicense/
+cd ..
+%setup -q -T -D -n Math-Base36-0.14 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Math-Base36-0.14/deblicense/
 
 %build
@@ -63,9 +61,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -74,8 +72,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Math/Base36.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Math/Base36.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Math::Base36.3
