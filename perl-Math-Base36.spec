@@ -4,7 +4,7 @@
 #
 Name     : perl-Math-Base36
 Version  : 0.14
-Release  : 4
+Release  : 5
 URL      : https://cpan.metacpan.org/authors/id/B/BR/BRICAS/Math-Base36-0.14.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BR/BRICAS/Math-Base36-0.14.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libm/libmath-base36-perl/libmath-base36-perl_0.14-1.debian.tar.xz
