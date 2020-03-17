@@ -4,7 +4,7 @@
 #
 Name     : perl-Math-Base36
 Version  : 0.14
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/B/BR/BRICAS/Math-Base36-0.14.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BR/BRICAS/Math-Base36-0.14.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libm/libmath-base36-perl/libmath-base36-perl_0.14-1.debian.tar.xz
@@ -82,7 +82,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Math-Base36
-cp %{_builddir}/Math-Base36-0.14/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Math-Base36/24b216d481caa6823ffb92f9e93701b0c9a4651a
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Math-Base36/24b216d481caa6823ffb92f9e93701b0c9a4651a
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -106,4 +106,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Math/Base36.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Math/Base36.pm
